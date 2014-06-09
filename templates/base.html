@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     {% block head %}
-    <title>SuperApp{% block title %}{% endblock %}</title>
+    <title>TrueCar{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -11,6 +11,7 @@
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+    <link rel="stylesheet" href="static/css/page.css">
     {% endblock %}
   </head>
   <body>
@@ -22,32 +23,29 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">SuperApp</a>
-        <div class="nav-collapse">
-          {% block navbar_right %}
-          <ul class="nav navbar-nav pull-right">
-            {% if not session.logged_in %}
-              <li><a href="#">Login or Signup</a></li>
-            {% else %}
-              <li><a href="#">Logout</a></li>
-            {% endif %}
-          </ul>
-          {% endblock %}
-        </div><!--/.nav-collapse -->
+        <a class="navbar-brand" href="/">TrueCar VSN Lookup</a>
       </div>
     </div>
     {% endblock %}
+    {% with messages = get_flashed_messages() %}
+      <div id="messages">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger">
+              <a class="close" data-dismiss="alert">×</a>
+              {{message}}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endwith %}
+    {% block body %}{% endblock %}
     <div class="container page">
         <div class="content">
           {% block content %}
           {% endblock %}
         </div>
         <hr>
-        {% block footer %}
-        <footer class="footer">
-            <p>&copy; SuperApp</p>
-        </footer>
-        {% endblock %}
     </div>
     {% block js_footer %}
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

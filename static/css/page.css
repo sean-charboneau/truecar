@@ -1,0 +1,4 @@
+.results-table tr:first-child + tr {
+	background-color: rgb(223, 240, 216);
+	border-color: rgb(214, 233, 198);
+}

@@ -1,9 +1,36 @@
 {% extends "base.html" %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-{% if not session.logged_in %}
-     <p>You are not logged in.</p>
-{% else %}
-     <p>You are logged in.</p>
+<form method="post" action="{{ url_for('index') }}">
+	<div class="col-lg-6">
+	    <div class="input-group">
+	        <input type="text" class="form-control" name="searchterm">
+	        <span class="input-group-btn">
+	          <button class="btn btn-default" type="submit">Search</button>
+	        </span>
+	    </div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
+</form>
+<br><br>
+{% if results %}
+<table class="table results-table">
+	<tr>
+		<th>Year</th>
+		<th>Make</th>
+		<th>Model</th>
+		<th>Trim ID</th>
+		<th>Trim Name</th>
+	</tr>
+	{% for res in results %}
+	    <tr>
+	    	<td>{{res.year}}</td>
+	    	<td>{{res.make}}</td>
+	    	<td>{{res.model}}</td>
+	    	<td>{{res.trim_id}}</td>
+	    	<td>{{res.trim_name}}</td>
+	    </tr>
+	{% endfor %}
+</table>
 {% endif %}
+<br><br>
 {% endblock %}
